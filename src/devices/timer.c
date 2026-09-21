@@ -37,6 +37,8 @@ static struct list sleepers;
 static unsigned loops_per_tick;
 
 static intr_handler_func timer_interrupt;
+static bool wake_before (const struct list_elem *a,
+                         const struct list_elem *b, void *aux UNUSED);
 static bool too_many_loops (unsigned loops);
 static void busy_wait (int64_t loops);
 static void real_time_sleep (int64_t num, int32_t denom);
@@ -115,7 +117,7 @@ timer_sleep (int64_t duration)
   /* Unsigned arithmetic also represents deadlines for INT64_MAX sleeps
      without overflowing a signed addition. */
   waiter.wake_tick = (uint64_t) ticks + (uint64_t) duration;
-  list_push_back (&sleepers, &waiter.elem);
+  list_insert_ordered (&sleepers, &waiter.elem, wake_before, NULL);
   /* Insertion and blocking are atomic with respect to the timer ISR. */
   sema_down (&waiter.done);
   intr_set_level (old_level);
@@ -191,26 +193,33 @@ timer_print_stats (void)
   printf ("Timer: %"PRId64" ticks\n", timer_ticks ());
 }
 
-/* Timer interrupt handler. */
+/* Stable insertion keeps equal deadlines in arrival order. */
+static bool
+wake_before (const struct list_elem *a, const struct list_elem *b,
+             void *aux UNUSED)
+{
+  const struct timer_waiter *wa = list_entry (a, struct timer_waiter, elem);
+  const struct timer_waiter *wb = list_entry (b, struct timer_waiter, elem);
+  return wa->wake_tick < wb->wake_tick;
+}
+
+/* Wake every expired waiter.  An empty queue or a future first deadline
+   needs O(1) work; waking K threads takes O(K).  No blocking in the ISR. */
 static void
 timer_interrupt (struct intr_frame *args UNUSED)
 {
-  struct list_elem *e;
-
   ticks++;
   thread_tick ();
-  e = list_begin (&sleepers);
-  while (e != list_end (&sleepers))
+  while (!list_empty (&sleepers))
     {
-      struct timer_waiter *waiter = list_entry (e, struct timer_waiter,
-                                              elem);
-      if (waiter->wake_tick <= (uint64_t) ticks)
-        {
-          e = list_remove (e);
-          sema_up (&waiter->done);
-        }
-      else
-        e = list_next (e);
+      struct timer_waiter *waiter;
+
+      waiter = list_entry (list_front (&sleepers), struct timer_waiter,
+                           elem);
+      if (waiter->wake_tick > (uint64_t) ticks)
+        break;
+      list_pop_front (&sleepers);
+      sema_up (&waiter->done);
     }
 }
 

@@ -683,3 +683,89 @@ Keyboard: 0 keys pressed
 Powering off...
 + 2026-09-20T15:16:13-03:00 grep -F '(alarm-blocking) PASS' ../../../logs/etapa3_blocking.output
 (alarm-blocking) PASS
+2026-09-20T15:17:40-03:00
+helioblaster
+/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn
++ 2026-09-20T15:17:40-03:00 set -euo pipefail
++ 2026-09-20T15:17:40-03:00 date -Is
+2026-09-20T15:17:40-03:00
++ 2026-09-20T15:17:40-03:00 make -j4
+make -C src/utils setitimer-helper
+make[1]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/utils'
+make[1]: 'setitimer-helper' is up to date.
+make[1]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/utils'
+make -C src/threads
+make[1]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads'
+cd build && make all
+make[2]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
+gcc -c ../../devices/timer.c -o devices/timer.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF devices/timer.d
+ld -melf_i386 -T threads/kernel.lds.s -o kernel.o threads/start.o threads/init.o threads/thread.o threads/switch.o threads/interrupt.o threads/intr-stubs.o threads/synch.o threads/palloc.o threads/malloc.o devices/pit.o devices/timer.o devices/kbd.o devices/vga.o devices/serial.o devices/block.o devices/partition.o devices/ide.o devices/input.o devices/intq.o devices/rtc.o devices/shutdown.o devices/speaker.o lib/debug.o lib/random.o lib/stdio.o lib/stdlib.o lib/string.o lib/arithmetic.o lib/ustar.o lib/kernel/debug.o lib/kernel/list.o lib/kernel/bitmap.o lib/kernel/hash.o lib/kernel/console.o tests/threads/tests.o tests/threads/alarm-wait.o tests/threads/alarm-simultaneous.o tests/threads/alarm-priority.o tests/threads/alarm-zero.o tests/threads/alarm-negative.o tests/threads/priority-change.o tests/threads/priority-donate-one.o tests/threads/priority-donate-multiple.o tests/threads/priority-donate-multiple2.o tests/threads/priority-donate-nest.o tests/threads/priority-donate-sema.o tests/threads/priority-donate-lower.o tests/threads/priority-fifo.o tests/threads/priority-preempt.o tests/threads/priority-sema.o tests/threads/priority-condvar.o tests/threads/priority-donate-chain.o tests/threads/mlfqs-load-1.o tests/threads/mlfqs-load-60.o tests/threads/mlfqs-load-avg.o tests/threads/mlfqs-recent-1.o tests/threads/mlfqs-fair.o tests/threads/mlfqs-block.o tests/threads/alarm-blocking.o
+objdump -S kernel.o > kernel.asm
+nm -n kernel.o > kernel.sym
+objcopy -R .note -R .comment -S kernel.o kernel.bin
+make[2]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
+make[1]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads'
++ 2026-09-20T15:17:42-03:00 make test
+make -C src/utils setitimer-helper
+make[1]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/utils'
+make[1]: 'setitimer-helper' is up to date.
+make[1]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/utils'
+make -C src/threads
+make[1]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads'
+cd build && make all
+make[2]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
+make[1]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads'
+make -C src/threads/build check TESTS="tests/threads/alarm-single tests/threads/alarm-multiple tests/threads/alarm-simultaneous tests/threads/alarm-zero tests/threads/alarm-negative"
+make[1]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
+pintos -v -k -T 60 --qemu  -- -q  run alarm-single < /dev/null 2> tests/threads/alarm-single.errors > tests/threads/alarm-single.output
+perl -I../.. ../../tests/threads/alarm-single.ck tests/threads/alarm-single tests/threads/alarm-single.result
+[32mpass tests/threads/alarm-single
+[0mpintos -v -k -T 60 --qemu  -- -q  run alarm-multiple < /dev/null 2> tests/threads/alarm-multiple.errors > tests/threads/alarm-multiple.output
+perl -I../.. ../../tests/threads/alarm-multiple.ck tests/threads/alarm-multiple tests/threads/alarm-multiple.result
+[32mpass tests/threads/alarm-multiple
+[0mpintos -v -k -T 60 --qemu  -- -q  run alarm-simultaneous < /dev/null 2> tests/threads/alarm-simultaneous.errors > tests/threads/alarm-simultaneous.output
+perl -I../.. ../../tests/threads/alarm-simultaneous.ck tests/threads/alarm-simultaneous tests/threads/alarm-simultaneous.result
+[32mpass tests/threads/alarm-simultaneous
+[0mpintos -v -k -T 60 --qemu  -- -q  run alarm-zero < /dev/null 2> tests/threads/alarm-zero.errors > tests/threads/alarm-zero.output
+perl -I../.. ../../tests/threads/alarm-zero.ck tests/threads/alarm-zero tests/threads/alarm-zero.result
+[32mpass tests/threads/alarm-zero
+[0mpintos -v -k -T 60 --qemu  -- -q  run alarm-negative < /dev/null 2> tests/threads/alarm-negative.errors > tests/threads/alarm-negative.output
+perl -I../.. ../../tests/threads/alarm-negative.ck tests/threads/alarm-negative tests/threads/alarm-negative.result
+[32mpass tests/threads/alarm-negative
+[0mpass tests/threads/alarm-single
+pass tests/threads/alarm-multiple
+pass tests/threads/alarm-simultaneous
+pass tests/threads/alarm-zero
+pass tests/threads/alarm-negative
+All 5 tests passed.
+make[1]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
++ 2026-09-20T15:17:56-03:00 cd src/threads/build
++ 2026-09-20T15:17:56-03:00 tee ../../../logs/etapa4_blocking.output
++ 2026-09-20T15:17:56-03:00 pintos -v -k -T 10 --qemu -- -q run alarm-blocking
+qemu-system-i386 -device isa-debug-exit -drive format=raw,media=disk,index=0,file=/tmp/jS5Il8VDd6.dsk -m 4 -net none -nographic -monitor null
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1ubuntu1)
+Booting from Hard Disk...
+PPiinnttooss  hhddaa1
+1
+LLooaaddiinngg.....................
+Kernel command line: -q run alarm-blocking
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  1,676,083,200 loops/s.
+Boot complete.
+Executing 'alarm-blocking':
+(alarm-blocking) begin
+(alarm-blocking) sleeping thread status=2; expected BLOCKED=2
+(alarm-blocking) PASS
+(alarm-blocking) end
+Execution of 'alarm-blocking' complete.
+Timer: 124 ticks
+Thread: 100 idle ticks, 24 kernel ticks, 0 user ticks
+Console: 476 characters output
+Keyboard: 0 keys pressed
+Powering off...
++ 2026-09-20T15:17:58-03:00 grep -F '(alarm-blocking) PASS' ../../../logs/etapa4_blocking.output
+(alarm-blocking) PASS
