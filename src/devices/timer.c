@@ -20,6 +20,18 @@
 /* Number of timer ticks since OS booted. */
 static int64_t ticks;
 
+/* Each entry lives on its sleeping thread's stack until sema_down returns.
+   Only the timer interrupt and timer_sleep access this list, with
+   interrupts disabled.  The semaphore has exactly one waiter. */
+struct timer_waiter
+  {
+    uint64_t wake_tick;
+    struct semaphore done;
+    struct list_elem elem;
+  };
+
+static struct list sleepers;
+
 /* Number of loops per timer tick.
    Initialized by timer_calibrate(). */
 static unsigned loops_per_tick;
@@ -35,6 +47,7 @@ static void real_time_delay (int64_t num, int32_t denom);
 void
 timer_init (void) 
 {
+  list_init (&sleepers);
   pit_configure_channel (0, 2, TIMER_FREQ);
   intr_register_ext (0x20, timer_interrupt, "8254 Timer");
 }
@@ -84,18 +97,28 @@ timer_elapsed (int64_t then)
   return timer_ticks () - then;
 }
 
-/* Sleeps for approximately TICKS timer ticks.  Interrupts must
-   be turned on. */
+/* Blocks for at least DURATION ticks.  Interrupts must be enabled.
+   Nonpositive durations return immediately. */
 void
-timer_sleep (int64_t ticks) 
+timer_sleep (int64_t duration)
 {
-  int64_t start = timer_ticks ();
+  struct timer_waiter waiter;
+  enum intr_level old_level;
 
+  ASSERT (!intr_context ());
   ASSERT (intr_get_level () == INTR_ON);
-  if (ticks <= 0)
+  if (duration <= 0)
     return;
-  while (timer_elapsed (start) < ticks) 
-    thread_yield ();
+
+  sema_init (&waiter.done, 0);
+  old_level = intr_disable ();
+  /* Unsigned arithmetic also represents deadlines for INT64_MAX sleeps
+     without overflowing a signed addition. */
+  waiter.wake_tick = (uint64_t) ticks + (uint64_t) duration;
+  list_push_back (&sleepers, &waiter.elem);
+  /* Insertion and blocking are atomic with respect to the timer ISR. */
+  sema_down (&waiter.done);
+  intr_set_level (old_level);
 }
 
 /* Sleeps for approximately MS milliseconds.  Interrupts must be
@@ -172,8 +195,23 @@ timer_print_stats (void)
 static void
 timer_interrupt (struct intr_frame *args UNUSED)
 {
+  struct list_elem *e;
+
   ticks++;
   thread_tick ();
+  e = list_begin (&sleepers);
+  while (e != list_end (&sleepers))
+    {
+      struct timer_waiter *waiter = list_entry (e, struct timer_waiter,
+                                              elem);
+      if (waiter->wake_tick <= (uint64_t) ticks)
+        {
+          e = list_remove (e);
+          sema_up (&waiter->done);
+        }
+      else
+        e = list_next (e);
+    }
 }
 
 /* Returns true if LOOPS iterations waits for more than one timer
