@@ -769,3 +769,263 @@ Keyboard: 0 keys pressed
 Powering off...
 + 2026-09-20T15:17:58-03:00 grep -F '(alarm-blocking) PASS' ../../../logs/etapa4_blocking.output
 (alarm-blocking) PASS
+2026-09-20T15:18:51-03:00
+helioblaster
+/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn
++ 2026-09-20T15:18:51-03:00 set -euo pipefail
++ 2026-09-20T15:18:51-03:00 date -Is
+2026-09-20T15:18:51-03:00
++ 2026-09-20T15:18:51-03:00 make -j4
+make -C src/utils setitimer-helper
+make[1]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/utils'
+make[1]: 'setitimer-helper' is up to date.
+make[1]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/utils'
+make -C src/threads
+make[1]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads'
+cd build && make all
+make[2]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
+gcc -c ../../threads/init.c -o threads/init.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF threads/init.d
+gcc -c ../../tests/threads/tests.c -o tests/threads/tests.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/tests.d
+gcc -c ../../tests/threads/alarm-wait.c -o tests/threads/alarm-wait.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-wait.d
+gcc -c ../../tests/threads/alarm-simultaneous.c -o tests/threads/alarm-simultaneous.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-simultaneous.d
+gcc -c ../../tests/threads/alarm-priority.c -o tests/threads/alarm-priority.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-priority.d
+gcc -c ../../tests/threads/alarm-zero.c -o tests/threads/alarm-zero.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-zero.d
+gcc -c ../../tests/threads/alarm-negative.c -o tests/threads/alarm-negative.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-negative.d
+gcc -c ../../tests/threads/priority-change.c -o tests/threads/priority-change.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-change.d
+gcc -c ../../tests/threads/priority-donate-one.c -o tests/threads/priority-donate-one.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-one.d
+gcc -c ../../tests/threads/priority-donate-multiple.c -o tests/threads/priority-donate-multiple.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-multiple.d
+gcc -c ../../tests/threads/priority-donate-multiple2.c -o tests/threads/priority-donate-multiple2.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-multiple2.d
+gcc -c ../../tests/threads/priority-donate-nest.c -o tests/threads/priority-donate-nest.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-nest.d
+gcc -c ../../tests/threads/priority-donate-sema.c -o tests/threads/priority-donate-sema.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-sema.d
+gcc -c ../../tests/threads/priority-donate-lower.c -o tests/threads/priority-donate-lower.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-lower.d
+gcc -c ../../tests/threads/priority-fifo.c -o tests/threads/priority-fifo.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-fifo.d
+gcc -c ../../tests/threads/priority-preempt.c -o tests/threads/priority-preempt.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-preempt.d
+gcc -c ../../tests/threads/priority-sema.c -o tests/threads/priority-sema.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-sema.d
+gcc -c ../../tests/threads/priority-condvar.c -o tests/threads/priority-condvar.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-condvar.d
+gcc -c ../../tests/threads/priority-donate-chain.c -o tests/threads/priority-donate-chain.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/priority-donate-chain.d
+gcc -c ../../tests/threads/mlfqs-load-1.c -o tests/threads/mlfqs-load-1.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs-load-1.d
+gcc -c ../../tests/threads/mlfqs-load-60.c -o tests/threads/mlfqs-load-60.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs-load-60.d
+gcc -c ../../tests/threads/mlfqs-load-avg.c -o tests/threads/mlfqs-load-avg.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs-load-avg.d
+gcc -c ../../tests/threads/mlfqs-recent-1.c -o tests/threads/mlfqs-recent-1.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs-recent-1.d
+gcc -c ../../tests/threads/mlfqs-fair.c -o tests/threads/mlfqs-fair.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs-fair.d
+gcc -c ../../tests/threads/mlfqs-block.c -o tests/threads/mlfqs-block.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/mlfqs-block.d
+gcc -c ../../tests/threads/alarm-blocking.c -o tests/threads/alarm-blocking.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-blocking.d
+gcc -c ../../tests/threads/alarm-extra.c -o tests/threads/alarm-extra.o -m32 -g -msoft-float -O2 -fno-pie -fno-omit-frame-pointer -std=gnu99 -ffreestanding -fno-stack-protector -nostdinc -I../.. -I../../lib -I../../lib/kernel -Wall -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers  -MMD -MF tests/threads/alarm-extra.d
+ld -melf_i386 -T threads/kernel.lds.s -o kernel.o threads/start.o threads/init.o threads/thread.o threads/switch.o threads/interrupt.o threads/intr-stubs.o threads/synch.o threads/palloc.o threads/malloc.o devices/pit.o devices/timer.o devices/kbd.o devices/vga.o devices/serial.o devices/block.o devices/partition.o devices/ide.o devices/input.o devices/intq.o devices/rtc.o devices/shutdown.o devices/speaker.o lib/debug.o lib/random.o lib/stdio.o lib/stdlib.o lib/string.o lib/arithmetic.o lib/ustar.o lib/kernel/debug.o lib/kernel/list.o lib/kernel/bitmap.o lib/kernel/hash.o lib/kernel/console.o tests/threads/tests.o tests/threads/alarm-wait.o tests/threads/alarm-simultaneous.o tests/threads/alarm-priority.o tests/threads/alarm-zero.o tests/threads/alarm-negative.o tests/threads/priority-change.o tests/threads/priority-donate-one.o tests/threads/priority-donate-multiple.o tests/threads/priority-donate-multiple2.o tests/threads/priority-donate-nest.o tests/threads/priority-donate-sema.o tests/threads/priority-donate-lower.o tests/threads/priority-fifo.o tests/threads/priority-preempt.o tests/threads/priority-sema.o tests/threads/priority-condvar.o tests/threads/priority-donate-chain.o tests/threads/mlfqs-load-1.o tests/threads/mlfqs-load-60.o tests/threads/mlfqs-load-avg.o tests/threads/mlfqs-recent-1.o tests/threads/mlfqs-fair.o tests/threads/mlfqs-block.o tests/threads/alarm-blocking.o tests/threads/alarm-extra.o
+objdump -S kernel.o > kernel.asm
+nm -n kernel.o > kernel.sym
+objcopy -R .note -R .comment -S kernel.o kernel.bin
+make[2]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
+make[1]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads'
++ 2026-09-20T15:18:53-03:00 make test
+make -C src/utils setitimer-helper
+make[1]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/utils'
+make[1]: 'setitimer-helper' is up to date.
+make[1]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/utils'
+make -C src/threads
+make[1]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads'
+cd build && make all
+make[2]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
+make[2]: Nothing to be done for 'all'.
+make[2]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
+make[1]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads'
+make -C src/threads/build check TESTS="tests/threads/alarm-single tests/threads/alarm-multiple tests/threads/alarm-simultaneous tests/threads/alarm-zero tests/threads/alarm-negative"
+make[1]: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
+pintos -v -k -T 60 --qemu  -- -q  run alarm-single < /dev/null 2> tests/threads/alarm-single.errors > tests/threads/alarm-single.output
+perl -I../.. ../../tests/threads/alarm-single.ck tests/threads/alarm-single tests/threads/alarm-single.result
+[32mpass tests/threads/alarm-single
+[0mpintos -v -k -T 60 --qemu  -- -q  run alarm-multiple < /dev/null 2> tests/threads/alarm-multiple.errors > tests/threads/alarm-multiple.output
+perl -I../.. ../../tests/threads/alarm-multiple.ck tests/threads/alarm-multiple tests/threads/alarm-multiple.result
+[32mpass tests/threads/alarm-multiple
+[0mpintos -v -k -T 60 --qemu  -- -q  run alarm-simultaneous < /dev/null 2> tests/threads/alarm-simultaneous.errors > tests/threads/alarm-simultaneous.output
+perl -I../.. ../../tests/threads/alarm-simultaneous.ck tests/threads/alarm-simultaneous tests/threads/alarm-simultaneous.result
+[32mpass tests/threads/alarm-simultaneous
+[0mpintos -v -k -T 60 --qemu  -- -q  run alarm-zero < /dev/null 2> tests/threads/alarm-zero.errors > tests/threads/alarm-zero.output
+perl -I../.. ../../tests/threads/alarm-zero.ck tests/threads/alarm-zero tests/threads/alarm-zero.result
+[32mpass tests/threads/alarm-zero
+[0mpintos -v -k -T 60 --qemu  -- -q  run alarm-negative < /dev/null 2> tests/threads/alarm-negative.errors > tests/threads/alarm-negative.output
+perl -I../.. ../../tests/threads/alarm-negative.ck tests/threads/alarm-negative tests/threads/alarm-negative.result
+[32mpass tests/threads/alarm-negative
+[0mpass tests/threads/alarm-single
+pass tests/threads/alarm-multiple
+pass tests/threads/alarm-simultaneous
+pass tests/threads/alarm-zero
+pass tests/threads/alarm-negative
+All 5 tests passed.
+make[1]: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
++ 2026-09-20T15:19:08-03:00 bash scripts/test-extra.sh
+qemu-system-i386 -device isa-debug-exit -drive format=raw,media=disk,index=0,file=/tmp/GTDI1OezKG.dsk -m 4 -net none -nographic -monitor null
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1ubuntu1)
+Booting from Hard Disk...
+PPiinnttooss  hhddaa1
+1
+LLooaaddiinngg.....................
+Kernel command line: -q run alarm-blocking
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  1,676,083,200 loops/s.
+Boot complete.
+Executing 'alarm-blocking':
+(alarm-blocking) begin
+(alarm-blocking) sleeping thread status=2; expected BLOCKED=2
+(alarm-blocking) PASS
+(alarm-blocking) end
+Execution of 'alarm-blocking' complete.
+Timer: 124 ticks
+Thread: 100 idle ticks, 24 kernel ticks, 0 user ticks
+Console: 476 characters output
+Keyboard: 0 keys pressed
+Powering off...
+(alarm-blocking) PASS
+qemu-system-i386 -device isa-debug-exit -drive format=raw,media=disk,index=0,file=/tmp/6L6SUmlNhU.dsk -m 4 -net none -nographic -monitor null
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1ubuntu1)
+Booting from Hard Disk...
+PPiinnttooss  hhddaa1
+1
+LLooaaddiinngg.....................
+Kernel command line: -q run alarm-deadline
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  1,676,083,200 loops/s.
+Boot complete.
+Executing 'alarm-deadline':
+(alarm-deadline) begin
+(alarm-deadline) six deadlines met; zero, negative and INT64_MIN returned
+(alarm-deadline) PASS
+(alarm-deadline) end
+Execution of 'alarm-deadline' complete.
+Timer: 63 ticks
+Thread: 39 idle ticks, 24 kernel ticks, 0 user ticks
+Console: 486 characters output
+Keyboard: 0 keys pressed
+Powering off...
+(alarm-deadline) PASS
+qemu-system-i386 -device isa-debug-exit -drive format=raw,media=disk,index=0,file=/tmp/rw4SjXaU1a.dsk -m 4 -net none -nographic -monitor null
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1ubuntu1)
+Booting from Hard Disk...
+PPiinnttooss  hhddaa1
+1
+LLooaaddiinngg.....................
+Kernel command line: -q run alarm-stress
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  1,676,083,200 loops/s.
+Boot complete.
+Executing 'alarm-stress':
+(alarm-stress) begin
+(alarm-stress) 24 threads completed 480 sleeps without early returns
+(alarm-stress) PASS
+(alarm-stress) end
+Execution of 'alarm-stress' complete.
+Timer: 151 ticks
+Thread: 127 idle ticks, 24 kernel ticks, 0 user ticks
+Console: 471 characters output
+Keyboard: 0 keys pressed
+Powering off...
+(alarm-stress) PASS
+qemu-system-i386 -device isa-debug-exit -drive format=raw,media=disk,index=0,file=/tmp/wCAjewqy8n.dsk -m 4 -net none -nographic -monitor null
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1ubuntu1)
+Booting from Hard Disk...
+PPiinnttooss  hhddaa1
+1
+LLooaaddiinngg.....................
+Kernel command line: -q run alarm-huge
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  1,256,652,800 loops/s.
+Boot complete.
+Executing 'alarm-huge':
+(alarm-huge) begin
+(alarm-huge) INT64_MAX remains blocked; observed for three ticks only
+(alarm-huge) PASS
+(alarm-huge) end
+Execution of 'alarm-huge' complete.
+Timer: 28 ticks
+Thread: 3 idle ticks, 25 kernel ticks, 0 user ticks
+Console: 457 characters output
+Keyboard: 0 keys pressed
+Powering off...
+(alarm-huge) PASS
+qemu-system-i386 -device isa-debug-exit -drive format=raw,media=disk,index=0,file=/tmp/hGZalfeqjE.dsk -m 4 -net none -nographic -monitor null
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1ubuntu1)
+Booting from Hard Disk...
+PPiinnttooss  hhddaa1
+1
+LLooaaddiinngg.....................
+Kernel command line: -q run alarm-arithmetic
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  1,676,083,200 loops/s.
+Boot complete.
+Executing 'alarm-arithmetic':
+(alarm-arithmetic) begin
+(alarm-arithmetic) PASS
+(alarm-arithmetic) end
+Execution of 'alarm-arithmetic' complete.
+Timer: 24 ticks
+Thread: 0 idle ticks, 24 kernel ticks, 0 user ticks
+Console: 423 characters output
+Keyboard: 0 keys pressed
+Powering off...
+(alarm-arithmetic) PASS
+5/5 testes adicionais positivos passaram.
++ 2026-09-20T15:19:13-03:00 bash scripts/test-negative.sh
+qemu-system-i386 -device isa-debug-exit -drive format=raw,media=disk,index=0,file=/tmp/SnEEgP9mWF.dsk -m 4 -net none -nographic -monitor null
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1ubuntu1)
+Booting from Hard Disk...
+PPiinnttooss  hhddaa1
+1
+LLooaaddiinngg.....................
+Kernel command line: -q run alarm-invalid
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  1,676,083,200 loops/s.
+Boot complete.
+Executing 'alarm-invalid':
+(alarm-invalid) begin
+(alarm-invalid) EXPECTED PANIC: calling timer_sleep with interrupts disabled
+Kernel PANIC at ../../devices/timer.c:111 in timer_sleep(): assertion `intr_get_level () == INTR_ON' failed.
+Call stack: 0xc00292e5 0xc0023b17 0xc002e030 0xc002b483 0xc00201f0 0xc002061b.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 24 ticks
+Thread: 0 idle ticks, 24 kernel ticks, 0 user ticks
+Console: 744 characters output
+Keyboard: 0 keys pressed
+Powering off...
+pintos exit=0 (a classificacao usa a mensagem, nao apenas o exit)
+Kernel PANIC at ../../devices/timer.c:111 in timer_sleep(): assertion `intr_get_level () == INTR_ON' failed.
+Kernel PANIC at ../../devices/timer.c:111 in timer_sleep(): assertion `intr_get_level () == INTR_ON' failed.
+PASS negativo: contrato de interrupcoes rejeitou a chamada invalida.
+qemu-system-i386 -device isa-debug-exit -drive format=raw,media=disk,index=0,file=/tmp/WUM5qpgf0F.dsk -m 4 -net none -nographic -monitor null
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1ubuntu1)
+Booting from Hard Disk...
+PPiinnttooss  hhddaa1
+1
+LLooaaddiinngg.....................
+Kernel command line: -q run alarm-nao-existe
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  1,676,083,200 loops/s.
+Boot complete.
+Executing 'alarm-nao-existe':
+Kernel PANIC at ../../tests/threads/tests.c:66 in run_test(): no test named "alarm-nao-existe"
+Call stack: 0xc00292e5 0xc002b4ba 0xc00201f0 0xc002061b.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 24 ticks
+Thread: 0 idle ticks, 24 kernel ticks, 0 user ticks
+Console: 615 characters output
+Keyboard: 0 keys pressed
+Powering off...
+Kernel PANIC at ../../tests/threads/tests.c:66 in run_test(): no test named "alarm-nao-existe"
+PASS negativo: nome de teste inexistente foi rejeitado.

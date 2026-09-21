@@ -41,3 +41,9 @@ void pass (void);
 
 
 void test_alarm_blocking (void);
+
+void test_alarm_deadline (void);
+void test_alarm_stress (void);
+void test_alarm_huge (void);
+void test_alarm_invalid (void);
+void test_alarm_arithmetic (void);

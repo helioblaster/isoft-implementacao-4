@@ -53,3 +53,5 @@ $(MLFQS_OUTPUTS): TIMEOUT = 480
 
 
 tests/threads_SRC += tests/threads/alarm-blocking.c
+
+tests/threads_SRC += tests/threads/alarm-extra.c
