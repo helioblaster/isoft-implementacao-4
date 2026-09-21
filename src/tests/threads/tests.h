@@ -39,3 +39,5 @@ void pass (void);
 
 #endif /* tests/threads/tests.h */
 
+
+void test_alarm_blocking (void);

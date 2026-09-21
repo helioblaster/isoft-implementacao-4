@@ -51,3 +51,5 @@ tests/threads/mlfqs-block.output
 $(MLFQS_OUTPUTS): KERNELFLAGS += -mlfqs
 $(MLFQS_OUTPUTS): TIMEOUT = 480
 
+
+tests/threads_SRC += tests/threads/alarm-blocking.c
