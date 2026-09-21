@@ -1029,3 +1029,168 @@ Keyboard: 0 keys pressed
 Powering off...
 Kernel PANIC at ../../tests/threads/tests.c:66 in run_test(): no test named "alarm-nao-existe"
 PASS negativo: nome de teste inexistente foi rejeitado.
+2026-09-20T15:19:33-03:00
+helioblaster
+/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn
++ 2026-09-20T15:19:33-03:00 set -euo pipefail
++ 2026-09-20T15:19:33-03:00 date -Is
+2026-09-20T15:19:33-03:00
++ 2026-09-20T15:19:33-03:00 python3 scripts/test-mutations.py
+2026-09-20T15:19:33.317279-03:00 MUTACAO DELIBERADA busy_wait
+COMMAND: pintos -v -k -T 5 --qemu -- -q run alarm-blocking
+qemu-system-i386 -device isa-debug-exit -drive format=raw,media=disk,index=0,file=/tmp/GUdC0kg9HP.dsk -m 4 -net none -nographic -monitor null
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1ubuntu1)
+Booting from Hard Disk...
+PPiinnttooss  hhddaa1
+1
+LLooaaddiinngg.....................
+Kernel command line: -q run alarm-blocking
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  1,676,083,200 loops/s.
+Boot complete.
+Executing 'alarm-blocking':
+(alarm-blocking) begin
+(alarm-blocking) sleeping thread status=1; expected BLOCKED=2
+(alarm-blocking) FAIL: timer_sleep keeps the sleeper READY (busy waiting)
+Kernel PANIC at ../../tests/threads/tests.c:99 in fail(): test failed
+Call stack: 0xc0029265 0xc002b486 0xc002dbc4 0xc002b403 0xc00201f0 0xc002061b.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 24 ticks
+Thread: 0 idle ticks, 24 kernel ticks, 0 user ticks
+Console: 767 characters output
+Keyboard: 0 keys pressed
+Powering off...
+
+DETECTADA: busy_wait | timer_sleep keeps the sleeper READY
+2026-09-20T15:19:39.224300-03:00 MUTACAO DELIBERADA early_wakeup
+COMMAND: pintos -v -k -T 5 --qemu -- -q run alarm-deadline
+qemu-system-i386 -device isa-debug-exit -drive format=raw,media=disk,index=0,file=/tmp/JdG4TRYwpX.dsk -m 4 -net none -nographic -monitor null
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1ubuntu1)
+Booting from Hard Disk...
+PPiinnttooss  hhddaa1
+1
+LLooaaddiinngg.....................
+Kernel command line: -q run alarm-deadline
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  1,676,083,200 loops/s.
+Boot complete.
+Executing 'alarm-deadline':
+(alarm-deadline) begin
+(alarm-deadline) FAIL: returned before requested deadline: 2
+Kernel PANIC at ../../tests/threads/tests.c:99 in fail(): test failed
+Call stack: 0xc00292e5 0xc002b506 0xc002dde8 0xc002b483 0xc00201f0 0xc002061b.
+The `backtrace' program can make call stacks useful.
+Read "Backtraces" in the "Debugging Tools" chapter
+of the Pintos documentation for more information.
+Timer: 26 ticks
+Thread: 2 idle ticks, 24 kernel ticks, 0 user ticks
+Console: 692 characters output
+Keyboard: 0 keys pressed
+Powering off...
+
+DETECTADA: early_wakeup | returned before requested deadline
+2026-09-20T15:19:44.956517-03:00 MUTACAO DELIBERADA lost_wakeup
+COMMAND: pintos -v -k -T 5 --qemu -- -q run alarm-blocking
+qemu-system-i386 -device isa-debug-exit -drive format=raw,media=disk,index=0,file=/tmp/u25du4VGZl.dsk -m 4 -net none -nographic -monitor null
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1ubuntu1)
+Booting from Hard Disk...
+PPiinnttooss  hhddaa1
+1
+LLooaaddiinngg.....................
+Kernel command line: -q run alarm-blocking
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  1,676,083,200 loops/s.
+Boot complete.
+Executing 'alarm-blocking':
+(alarm-blocking) begin
+(alarm-blocking) sleeping thread status=2; expected BLOCKED=2
+qemu-system-i386: terminating on signal 2 from pid 1200 (/usr/bin/perl)
+
+TIMEOUT after 6 seconds of wall-clock time - load average: 0.60, 0.20, 0.07
+
+DETECTADA: lost_wakeup | TIMEOUT
+3/3 mutacoes detectadas. SHA256 do timer.c original: 22ac3d284f2ad0715f84acfece95c0d6a0754133aef53658aef7212f998f5174
++ 2026-09-20T15:19:56-03:00 echo 'DIAGNOSTICO FORA DO ESCOPO: alarm-priority requer escalonamento por prioridade.'
+DIAGNOSTICO FORA DO ESCOPO: alarm-priority requer escalonamento por prioridade.
++ 2026-09-20T15:19:56-03:00 make -C src/threads/build tests/threads/alarm-priority.result
+make: Entering directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
+pintos -v -k -T 60 --qemu  -- -q  run alarm-priority < /dev/null 2> tests/threads/alarm-priority.errors > tests/threads/alarm-priority.output
+perl -I../.. ../../tests/threads/alarm-priority.ck tests/threads/alarm-priority tests/threads/alarm-priority.result
+[31mFAIL tests/threads/alarm-priority
+[0mTest output failed to match any acceptable form.
+
+Acceptable output:
+  (alarm-priority) begin
+  (alarm-priority) Thread priority 30 woke up.
+  (alarm-priority) Thread priority 29 woke up.
+  (alarm-priority) Thread priority 28 woke up.
+  (alarm-priority) Thread priority 27 woke up.
+  (alarm-priority) Thread priority 26 woke up.
+  (alarm-priority) Thread priority 25 woke up.
+  (alarm-priority) Thread priority 24 woke up.
+  (alarm-priority) Thread priority 23 woke up.
+  (alarm-priority) Thread priority 22 woke up.
+  (alarm-priority) Thread priority 21 woke up.
+  (alarm-priority) end
+Differences in `diff -u' format:
+  (alarm-priority) begin
+- (alarm-priority) Thread priority 30 woke up.
+- (alarm-priority) Thread priority 29 woke up.
+- (alarm-priority) Thread priority 28 woke up.
+- (alarm-priority) Thread priority 27 woke up.
+- (alarm-priority) Thread priority 26 woke up.
+  (alarm-priority) Thread priority 25 woke up.
+  (alarm-priority) Thread priority 24 woke up.
+  (alarm-priority) Thread priority 23 woke up.
+  (alarm-priority) Thread priority 22 woke up.
+  (alarm-priority) Thread priority 21 woke up.
++ (alarm-priority) Thread priority 30 woke up.
++ (alarm-priority) Thread priority 29 woke up.
++ (alarm-priority) Thread priority 28 woke up.
++ (alarm-priority) Thread priority 27 woke up.
++ (alarm-priority) Thread priority 26 woke up.
+  (alarm-priority) end
+make: Leaving directory '/mnt/c/Users/PICHAU/Documents/Codex/2026-09-20/te-x20/work/hmrn/src/threads/build'
++ 2026-09-20T15:20:02-03:00 cat src/threads/build/tests/threads/alarm-priority.result
+FAIL
+Test output failed to match any acceptable form.
+
+Acceptable output:
+  (alarm-priority) begin
+  (alarm-priority) Thread priority 30 woke up.
+  (alarm-priority) Thread priority 29 woke up.
+  (alarm-priority) Thread priority 28 woke up.
+  (alarm-priority) Thread priority 27 woke up.
+  (alarm-priority) Thread priority 26 woke up.
+  (alarm-priority) Thread priority 25 woke up.
+  (alarm-priority) Thread priority 24 woke up.
+  (alarm-priority) Thread priority 23 woke up.
+  (alarm-priority) Thread priority 22 woke up.
+  (alarm-priority) Thread priority 21 woke up.
+  (alarm-priority) end
+Differences in `diff -u' format:
+  (alarm-priority) begin
+- (alarm-priority) Thread priority 30 woke up.
+- (alarm-priority) Thread priority 29 woke up.
+- (alarm-priority) Thread priority 28 woke up.
+- (alarm-priority) Thread priority 27 woke up.
+- (alarm-priority) Thread priority 26 woke up.
+  (alarm-priority) Thread priority 25 woke up.
+  (alarm-priority) Thread priority 24 woke up.
+  (alarm-priority) Thread priority 23 woke up.
+  (alarm-priority) Thread priority 22 woke up.
+  (alarm-priority) Thread priority 21 woke up.
++ (alarm-priority) Thread priority 30 woke up.
++ (alarm-priority) Thread priority 29 woke up.
++ (alarm-priority) Thread priority 28 woke up.
++ (alarm-priority) Thread priority 27 woke up.
++ (alarm-priority) Thread priority 26 woke up.
+  (alarm-priority) end
